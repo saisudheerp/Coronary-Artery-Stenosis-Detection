@@ -1,3 +1,4 @@
+
 # Coronary Artery Stenosis Detection Using YOLOv8
 
 ## Overview
@@ -58,3 +59,97 @@ Qualitative results show accurate detection of stenosis regions with minimal fal
   - matplotlib
 
 Install the dependencies using:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/your-repo-name/coronary-stenosis-detection.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd coronary-stenosis-detection
+```
+
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Usage
+
+### Training
+
+To train the model on your dataset:
+
+```bash
+!yolo task=detect mode=train model=yolov8s.pt data=path/to/data.yaml epochs=25 imgsz=800 plots=True
+```
+
+### Validation
+
+To validate the model:
+
+```bash
+!yolo task=detect mode=val model=path/to/best.pt data=path/to/data.yaml
+```
+
+### Prediction
+
+To run predictions on test images:
+
+```bash
+!yolo task=detect mode=predict model=path/to/best.pt conf=0.25 source=path/to/test/images save=True
+```
+
+---
+
+## Visualizations
+
+- **Confusion Matrix**: Located at `runs/detect/train/confusion_matrix.png`
+- **Validation Results**: Located at `runs/detect/train/results.png`
+- **Predictions**: Saved in the `runs/detect/predict` directory.
+
+---
+
+## Future Scope
+
+1. Enhance the model for better performance at stricter IoU thresholds, as this would improve the system's ability to handle complex cases and ensure reliable detection in challenging scenarios.
+2. Extend the dataset with more diverse images to improve generalization, which is critical for the model to perform effectively across different patient populations and imaging conditions.
+3. Integrate the system into clinical workflows as a real-time decision support tool, enabling faster diagnoses and aiding clinicians in making timely, data-driven decisions to improve patient outcomes.
+4. Explore hybrid models to improve both precision and inference speed.
+
+---
+
+## Acknowledgments
+
+- Inspired by prior work on stenosis detection, including Faster-RCNN, SSD MobileNet V2, and StenUNet.
+- Special thanks to KLE Technological University for their support and resources.
+
+---
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.
+
+---
+
+## Contact
+
+For any inquiries or collaboration opportunities, please contact:
+
+- **Name**: P Sai Sudheer
+- **Email**: [[your-email@example.com](mailto\:your-email@example.com)]
+- **GitHub**: [https://github.com/your-profile](https://github.com/your-profile)
