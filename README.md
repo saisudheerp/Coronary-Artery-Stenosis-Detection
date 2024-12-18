@@ -47,14 +47,4 @@ Qualitative results show accurate detection of stenosis regions with minimal fal
 
 ---
 
-## Requirements
 
-- Python 3.10
-- PyTorch 2.5.1
-- CUDA-compatible GPU
-- Required Python Libraries:
-  - ultralytics (v8.2.103)
-  - numpy
-  - matplotlib
-
-Install the dependencies using:
