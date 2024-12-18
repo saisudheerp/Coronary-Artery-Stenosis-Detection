@@ -1,84 +1,64 @@
-# Indian Food Classification using InceptionV3
 
+# Coronary Artery Stenosis Detection Using YOLOv8
 
+## Overview
 
-This project leverages deep learning to classify Indian food images into 20 categories using InceptionV3 with transfer learning. The goal is to create an accurate and robust model that can distinguish between visually similar dishes, aiding food recognition for various applications.
+This project focuses on the development and implementation of a real-time coronary artery stenosis (CAS) detection system using the YOLOv8 deep learning model. YOLOv8 was chosen for its balance between high accuracy and fast inference speed, making it ideal for real-time clinical applications. CAS is a life-threatening condition caused by the narrowing of coronary arteries, which can lead to critical cardiovascular events. By leveraging machine learning, this project provides a non-invasive, efficient, and cost-effective solution to aid in early detection and diagnosis.
 
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Dataset](#dataset)
-- [Model Architecture](#model-architecture)
-- [Training and Evaluation](#training-and-evaluation)
-- [Results](#results)
-- [Applications](#applications)
-
-## Project Overview
-Indian cuisine is known for its variety and visual complexity, making it a challenging problem for image classification models. This project addresses this challenge by using transfer learning with InceptionV3, a powerful convolutional neural network (CNN) model pre-trained on ImageNet. The model is fine-tuned to classify Indian food into categories such as Samosa, Masala Dosa, Chai, Pav Bhaji, and more.
+---
 
 ## Features
-- **Food Classification:** Classifies 20 different Indian food categories with high accuracy.
-- **Transfer Learning:** Uses pre-trained InceptionV3 weights from ImageNet for faster convergence and improved accuracy.
-- **Data Augmentation:** Applies image transformations such as zoom, flip, and shear to improve model generalization.
-- **Efficient Training:** Trains with real-time data augmentation for more robust model performance.
-- **Prediction Capability:** Predicts food categories for individual images or entire folders.
+
+- **High Accuracy**: Achieved a precision of 95.3% and recall of 93.6%.
+- **Real-time Capability**: Inference time of 12.8 milliseconds per image.
+- **User-Friendly Workflow**: Provides easy-to-use scripts for training, validation, and prediction.
+- **Data Visualization**: Includes tools to visualize results and confusion matrices.
+
+---
 
 ## Dataset
-The model is trained on the Food20 dataset, which consists of:
-- 4,018 training images
-- 1,250 validation images
-- 20 food categories such as Biryani, Idli, Paneer Tikka, and Kulfi.
 
-<p align="center">
-  <img src="indian_food.jpg" alt="Indian Food Classification" width="400"/>
-</p>
+- **Training Set**: 6700 images
+- **Validation Set**: 1542 images
+- **Test Set**: 800 images
+- **Annotation Format**: YOLO-compatible labels were used.
 
-The dataset is split into training and validation sets, with images preprocessed (resized and normalized) to fit the InceptionV3 input requirements.
+The dataset comprises high-quality coronary angiography images annotated for stenosis regions.
 
-## Model Architecture
-We fine-tune InceptionV3, a state-of-the-art CNN model, for our food classification task. The model architecture is as follows:
-- **Base model:** Pre-trained InceptionV3 without the top layers (trained on ImageNet).
-- **Global Average Pooling Layer:** Reduces the dimensionality of feature maps.
-- **Fully Connected Layer:** A dense layer with 128 units and ReLU activation.
-- **Dropout Layer:** A dropout rate of 20% to prevent overfitting.
-- **Output Layer:** A dense layer with softmax activation for 20 categories.
+---
 
-<p align="center">
-  <img src="1.png" alt="1.png" width="400"/>
-</p>
+## Methodology
 
-The model is trained using categorical crossentropy as the loss function and optimized using Stochastic Gradient Descent (SGD) with a learning rate of 0.0001.
+1. **Data Preprocessing**: The dataset was thoroughly cleaned by removing duplicate and low-quality images to ensure optimal model performance. Annotations were converted to the YOLOv8-compatible format, and additional preprocessing steps included resizing images to 800x800 pixels and normalizing pixel values to a range of 0-1. Data augmentation techniques, such as random rotations, flipping, and scaling, were applied to improve model generalization.
+2. **Model Selection**: YOLOv8 was chosen for its balance between accuracy and inference speed, providing a lightweight yet powerful architecture suitable for real-time applications.
+3. **Training**: The model was fine-tuned for 25 epochs using a learning rate of 0.001 and a batch size of 16. Pre-trained weights from YOLOv8s were used to initialize the model, allowing it to adapt quickly to the coronary angiography dataset. The training process monitored both object detection and classification loss to optimize performance.
+4. **Validation and Testing**: Model performance was rigorously evaluated using metrics such as precision, recall, and mean Average Precision (mAP) at various IoU thresholds. Validation included analyzing confusion matrices and bounding box predictions to ensure robustness and reliability.
 
-## Training and Evaluation
-The model is trained for 20 epochs using ImageDataGenerator for real-time data augmentation. The following augmentations are applied:
-- **Rescaling:** Normalizes pixel values.
-- **Shear and Zoom:** Randomly distorts images for better generalization.
-- **Horizontal Flip:** Increases variety by flipping images horizontally.
-
-We evaluated the model using accuracy and loss metrics. The training and validation accuracy were tracked across epochs to ensure the model did not overfit.
-
-### Performance Metrics:
-- **Training Accuracy:** 87%
-- **Validation Accuracy:** 85%
-- **Test Accuracy:** 89%
+---
 
 ## Results
-The model performs exceptionally well on a variety of Indian food images, with a test accuracy of 89%, and also proved its efficiency for predicting single image and batch images. This level of performance suggests the model is well-suited for deployment.
-<p align="center">
-  <img src="image.png" alt="1.png" width="400"/>
-</p>
-To assess the performance of the our InceptionV3 model, we compared it with other state-of-the-art models:
 
-| Model                 | Accuracy (%) |
-|-----------------------|--------------|
-| InceptionV3          | 87.0         |
-| Xception              | 83.4         |
-| InceptionResNetV2     | 80.5         |
+- **Precision**: 95.3%
+- **Recall**: 93.6%
+- **mAP@50**: 96.9%
+- **mAP@50-95**: 46.9%
+- **Inference Time**: 12.8 ms per image
 
-These results demonstrate that  Our InceptionV3 model is highly effective for classifying Indian food images, outperforming other competitive architectures in terms of accuracy.
+Qualitative results show accurate detection of stenosis regions with minimal false positives. When compared to other models, YOLOv8 outperformed Faster-RCNN Inception ResNet V2 and SSD MobileNet V2 in terms of speed and achieved competitive accuracy. Specifically, Faster-RCNN Inception ResNet V2 achieved an mAP of 95% but had a slow inference speed of 3 fps, while SSD MobileNet V2 was faster with 38 fps but had a lower accuracy of 83%. This highlights YOLOv8's effectiveness as a balanced solution for real-time and accurate detection.
 
-## Applications
-The model can be utilized in various applications, including:
-- Food delivery apps
-- Calorie tracking apps
-- Restaurant menus and search systems
+---
+
+## Requirements
+
+- Python 3.10
+- PyTorch 2.5.1
+- CUDA-compatible GPU
+- Required Python Libraries:
+  - ultralytics (v8.2.103)
+  - numpy
+  - matplotlib
+
+Install the dependencies using:
+
+```bash
+pip install -r requirements.txt
